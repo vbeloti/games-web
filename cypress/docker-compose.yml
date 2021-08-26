@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  api:
+    container_name: games_api
+    image: games/api:latest
+    environment:
+      DATABASE_HOST: db
+      DATABASE_PORT: 5432
+      DATABASE_USERNAME: games
+      DATABASE_PASSWORD: games
+      DATABASE_NAME: games
+      STRIPE_KEY: 'test_stripe_key'
+    ports:
+      - '1337:1337'
+    depends_on:
+      - db
+
+  db:
+    container_name: games_db
+    image: games/database:latest
+    ports:
+      - '5432:5432'
